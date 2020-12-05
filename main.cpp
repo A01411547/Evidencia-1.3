@@ -11,7 +11,10 @@ struct informacion{
 };
 
 
+// funcion orden
 //o(1)
+// Esta funcion se encarga de asignar un valor numerico a la fecha, para
+// poder ordenar los accesos posteriormente
 int Orden(string mes, int dia){
     if(mes == "Jun")
         return 600 + dia;
@@ -37,7 +40,10 @@ void llenarVector(vector<Entradas*> &v){
     } 
      file.close();  
 }
+// Funcion juntar
 //o(n)
+// esta funcion se encarga de hacer la fusión que es parte del
+// proceso de merge sort
 void juntar(vector<Entradas*> &v, vector<Entradas*> &mov, int ini, int fin){
     int med = (ini + fin) / 2;
     int i = ini;
@@ -55,7 +61,11 @@ void juntar(vector<Entradas*> &v, vector<Entradas*> &mov, int ini, int fin){
     
     for(int z = ini; z <= fin; z++)        v[z] = mov[z];
 }
+// funcion Mergesort
 //o(nlog2 n)
+// este es el alogritmo general de merge sort, desde aqui se 
+// manda a llamar a las funciones que se involucran en el 
+// ordenamiento, incluyendo recursividad. 
 void MergeSort(vector<Entradas*> &v, vector<Entradas*> &mov, int ini, int fin){
     int med;
 
@@ -66,7 +76,11 @@ void MergeSort(vector<Entradas*> &v, vector<Entradas*> &mov, int ini, int fin){
         juntar(v, mov, ini, fin);
     }
 }
+// funcion busqueda binaria
 //o(log n)
+// este algoritmo es la implementacion de la busqueda binaria
+ // la cual es mucho mas eficiente que la busqueda recursividad
+  // y se puede usar gracias a que los datos estan ordenados
 int busquedaBinaria(vector<Entradas*> v, int llave, bool inicio){
     int tamanio = v.size(), ini = 0, fin = tamanio - 1,  med;
     
@@ -89,7 +103,12 @@ int busquedaBinaria(vector<Entradas*> v, int llave, bool inicio){
     }  
     return -1; //no se encuentra 
 }
+
+// funcion busqueda
 //o(logn)
+// esta funcion se encarga de manejar por completo la realizacion 
+// de bisuqedas, incluyendo las impresiones en pantalla
+
 void busqueda(vector<Entradas*> v, string mesInicial, string mesFinal, int diaInicial, int diaFinal){
     int ini = Orden(mesInicial, diaInicial), posInicial;
     int fin = Orden(mesFinal, diaFinal), posFinal;
@@ -106,6 +125,7 @@ void busqueda(vector<Entradas*> v, string mesInicial, string mesFinal, int diaIn
 }
 
 //o(n)
+//funcion guardar en archivo. se encarga de escribir el vector en un archivo de salida
 void guardarEnArchivo(vector<Entradas*> v, string nomfile){
     ofstream file(nomfile);
     int tamanio = v.size();
